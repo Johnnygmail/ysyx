@@ -3,11 +3,13 @@ NXDC_FILES = constr/top.nxdc
 INC_PATH ?=
 
 VERILATOR = verilator
-VERILATOR_CFLAGS += -MMD --build -cc  \
+VERILATOR_CFLAGS += -MMD  --build -cc  \
                                 -O3 --x-assign fast --x-initial fast --noassert
 
 BUILD_DIR = ./build
+BUILD_SIM=./build_sim
 OBJ_DIR = $(BUILD_DIR)/obj_dir
+OBJ_DIR_SIM=$(BUILD_SIM)/obj_dir
 BIN = $(BUILD_DIR)/$(TOPNAME)
 
 default: $(BIN)
@@ -22,7 +24,7 @@ $(SRC_AUTO_BIND): $(NXDC_FILES)
 VSRCS = $(shell find $(abspath ./vsrc) -name "*.v")
 CSRCS = $(shell find $(abspath ./csrc) -name "*.c" -or -name "*.cc" -or -name "*.cpp")
 CSRCS += $(SRC_AUTO_BIND)
-
+CSRC_SIM=$(shell find $(abspath ./csrc_sim) -name "*.c" -or -name "*.cc" -or -name "*.cpp")
 # rules for NVBoard
 include $(NVBOARD_HOME)/scripts/nvboard.mk
 
@@ -42,7 +44,12 @@ all:default
 	@echo "Write this Makefile by your self."
 
 sim:
-	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
+	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!
+	$(VERILATOR) --cc --exe --trace --build \
+		--top-module $(TOPNAME) $(VSRCS) $(CSRC_SIM)
+	make -C obj_dir -f Vtop.mk Vtop
+	./obj_dir/Vtop
+	gtkwave wave.vcd
 	@echo "Write this Makefile by your self."
 run: $(BIN)
 	@$^
