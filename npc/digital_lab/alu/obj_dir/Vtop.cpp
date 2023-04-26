@@ -11,10 +11,13 @@
 Vtop::Vtop(VerilatedContext* _vcontextp__, const char* _vcname__)
     : VerilatedModel{*_vcontextp__}
     , vlSymsp{new Vtop__Syms(contextp(), _vcname__, this)}
-    , X{vlSymsp->TOP.X}
-    , Y{vlSymsp->TOP.Y}
-    , empty{vlSymsp->TOP.empty}
-    , sseg{vlSymsp->TOP.sseg}
+    , A{vlSymsp->TOP.A}
+    , B{vlSymsp->TOP.B}
+    , crl{vlSymsp->TOP.crl}
+    , result{vlSymsp->TOP.result}
+    , carry{vlSymsp->TOP.carry}
+    , overflow{vlSymsp->TOP.overflow}
+    , zero{vlSymsp->TOP.zero}
     , rootp{&(vlSymsp->TOP)}
 {
     // Register model with the context

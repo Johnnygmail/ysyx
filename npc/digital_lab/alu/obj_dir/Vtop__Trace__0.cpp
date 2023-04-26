@@ -23,10 +23,14 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
     // Init
     uint32_t* const oldp VL_ATTR_UNUSED = bufp->oldp(vlSymsp->__Vm_baseCode + 1);
     // Body
-    bufp->chgCData(oldp+0,(vlSelf->X),8);
-    bufp->chgCData(oldp+1,(vlSelf->Y),3);
-    bufp->chgBit(oldp+2,(vlSelf->empty));
-    bufp->chgCData(oldp+3,(vlSelf->sseg),7);
+    bufp->chgCData(oldp+0,(vlSelf->A),4);
+    bufp->chgCData(oldp+1,(vlSelf->B),4);
+    bufp->chgCData(oldp+2,(vlSelf->crl),3);
+    bufp->chgCData(oldp+3,(vlSelf->result),4);
+    bufp->chgBit(oldp+4,(vlSelf->overflow));
+    bufp->chgBit(oldp+5,(vlSelf->carry));
+    bufp->chgBit(oldp+6,(vlSelf->zero));
+    bufp->chgCData(oldp+7,(vlSelf->top__DOT__result_m),4);
 }
 
 void Vtop___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {

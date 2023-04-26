@@ -6,25 +6,32 @@
 
 #include "Vtop___024root.h"
 
-extern const VlUnpacked<CData/*2:0*/, 256> Vtop__ConstPool__TABLE_h4bcc976c_0;
-extern const VlUnpacked<CData/*6:0*/, 8> Vtop__ConstPool__TABLE_hc682995c_0;
+extern const VlUnpacked<CData/*3:0*/, 2048> Vtop__ConstPool__TABLE_hfec2cb20_0;
 
 VL_INLINE_OPT void Vtop___024root___ico_sequent__TOP__0(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___ico_sequent__TOP__0\n"); );
     // Init
-    CData/*7:0*/ __Vtableidx1;
+    SData/*10:0*/ __Vtableidx1;
     __Vtableidx1 = 0;
-    CData/*2:0*/ __Vtableidx2;
-    __Vtableidx2 = 0;
     // Body
-    vlSelf->empty = (0U == (IData)(vlSelf->X));
-    __Vtableidx1 = vlSelf->X;
-    vlSelf->Y = Vtop__ConstPool__TABLE_h4bcc976c_0[__Vtableidx1];
-    __Vtableidx2 = vlSelf->Y;
-    vlSelf->sseg = Vtop__ConstPool__TABLE_hc682995c_0
-        [__Vtableidx2];
+    vlSelf->carry = (1U == (((IData)(vlSelf->A) + (IData)(vlSelf->B)) 
+                            >> 4U));
+    __Vtableidx1 = (((IData)(vlSelf->B) << 7U) | (((IData)(vlSelf->A) 
+                                                   << 3U) 
+                                                  | (IData)(vlSelf->crl)));
+    vlSelf->top__DOT__result_m = Vtop__ConstPool__TABLE_hfec2cb20_0
+        [__Vtableidx1];
+    vlSelf->result = vlSelf->top__DOT__result_m;
+    vlSelf->zero = (1U & (~ (IData)((0U != (IData)(vlSelf->top__DOT__result_m)))));
+    vlSelf->overflow = (((1U & ((IData)(vlSelf->A) 
+                                >> 3U)) == (1U & ((IData)(vlSelf->B) 
+                                                  >> 3U))) 
+                        & ((1U & ((IData)(vlSelf->top__DOT__result_m) 
+                                  >> 3U)) != (1U & 
+                                              ((IData)(vlSelf->A) 
+                                               >> 3U))));
 }
 
 void Vtop___024root___eval_ico(Vtop___024root* vlSelf) {
@@ -82,7 +89,7 @@ void Vtop___024root___eval(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
                 Vtop___024root___dump_triggers__ico(vlSelf);
 #endif
-                VL_FATAL_MT("/home/johnny/ysyx-workbench/npc/digital_lab/decoder/vsrc/top.v", 2, "", "Input combinational region did not converge.");
+                VL_FATAL_MT("/home/johnny/ysyx-workbench/npc/digital_lab/alu/vsrc/top.v", 1, "", "Input combinational region did not converge.");
             }
             vlSelf->__VicoIterCount = ((IData)(1U) 
                                        + vlSelf->__VicoIterCount);
@@ -105,7 +112,7 @@ void Vtop___024root___eval(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
                     Vtop___024root___dump_triggers__act(vlSelf);
 #endif
-                    VL_FATAL_MT("/home/johnny/ysyx-workbench/npc/digital_lab/decoder/vsrc/top.v", 2, "", "Active region did not converge.");
+                    VL_FATAL_MT("/home/johnny/ysyx-workbench/npc/digital_lab/alu/vsrc/top.v", 1, "", "Active region did not converge.");
                 }
                 vlSelf->__VactIterCount = ((IData)(1U) 
                                            + vlSelf->__VactIterCount);
@@ -120,7 +127,7 @@ void Vtop___024root___eval(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
                 Vtop___024root___dump_triggers__nba(vlSelf);
 #endif
-                VL_FATAL_MT("/home/johnny/ysyx-workbench/npc/digital_lab/decoder/vsrc/top.v", 2, "", "NBA region did not converge.");
+                VL_FATAL_MT("/home/johnny/ysyx-workbench/npc/digital_lab/alu/vsrc/top.v", 1, "", "NBA region did not converge.");
             }
             __VnbaIterCount = ((IData)(1U) + __VnbaIterCount);
             Vtop___024root___eval_nba(vlSelf);
@@ -133,5 +140,12 @@ void Vtop___024root___eval_debug_assertions(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_debug_assertions\n"); );
+    // Body
+    if (VL_UNLIKELY((vlSelf->A & 0xf0U))) {
+        Verilated::overWidthError("A");}
+    if (VL_UNLIKELY((vlSelf->B & 0xf0U))) {
+        Verilated::overWidthError("B");}
+    if (VL_UNLIKELY((vlSelf->crl & 0xf8U))) {
+        Verilated::overWidthError("crl");}
 }
 #endif  // VL_DEBUG

@@ -11,15 +11,22 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     // Init
     const int c = vlSymsp->__Vm_baseCode;
     // Body
-    tracep->declBus(c+1,"X", false,-1, 7,0);
-    tracep->declBus(c+2,"Y", false,-1, 2,0);
-    tracep->declBit(c+3,"empty", false,-1);
-    tracep->declBus(c+4,"sseg", false,-1, 6,0);
+    tracep->declBus(c+1,"A", false,-1, 3,0);
+    tracep->declBus(c+2,"B", false,-1, 3,0);
+    tracep->declBus(c+3,"crl", false,-1, 2,0);
+    tracep->declBus(c+4,"result", false,-1, 3,0);
+    tracep->declBit(c+5,"overflow", false,-1);
+    tracep->declBit(c+6,"carry", false,-1);
+    tracep->declBit(c+7,"zero", false,-1);
     tracep->pushNamePrefix("top ");
-    tracep->declBus(c+1,"X", false,-1, 7,0);
-    tracep->declBus(c+2,"Y", false,-1, 2,0);
-    tracep->declBit(c+3,"empty", false,-1);
-    tracep->declBus(c+4,"sseg", false,-1, 6,0);
+    tracep->declBus(c+1,"A", false,-1, 3,0);
+    tracep->declBus(c+2,"B", false,-1, 3,0);
+    tracep->declBus(c+3,"crl", false,-1, 2,0);
+    tracep->declBus(c+4,"result", false,-1, 3,0);
+    tracep->declBus(c+8,"result_m", false,-1, 3,0);
+    tracep->declBit(c+5,"overflow", false,-1);
+    tracep->declBit(c+6,"carry", false,-1);
+    tracep->declBit(c+7,"zero", false,-1);
     tracep->popNamePrefix(1);
 }
 
@@ -63,8 +70,12 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     // Init
     uint32_t* const oldp VL_ATTR_UNUSED = bufp->oldp(vlSymsp->__Vm_baseCode);
     // Body
-    bufp->fullCData(oldp+1,(vlSelf->X),8);
-    bufp->fullCData(oldp+2,(vlSelf->Y),3);
-    bufp->fullBit(oldp+3,(vlSelf->empty));
-    bufp->fullCData(oldp+4,(vlSelf->sseg),7);
+    bufp->fullCData(oldp+1,(vlSelf->A),4);
+    bufp->fullCData(oldp+2,(vlSelf->B),4);
+    bufp->fullCData(oldp+3,(vlSelf->crl),3);
+    bufp->fullCData(oldp+4,(vlSelf->result),4);
+    bufp->fullBit(oldp+5,(vlSelf->overflow));
+    bufp->fullBit(oldp+6,(vlSelf->carry));
+    bufp->fullBit(oldp+7,(vlSelf->zero));
+    bufp->fullCData(oldp+8,(vlSelf->top__DOT__result_m),4);
 }

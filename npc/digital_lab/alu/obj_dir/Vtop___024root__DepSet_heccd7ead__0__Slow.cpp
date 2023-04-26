@@ -48,7 +48,7 @@ VL_ATTR_COLD void Vtop___024root___eval_settle(Vtop___024root* vlSelf) {
 #ifdef VL_DEBUG
                 Vtop___024root___dump_triggers__stl(vlSelf);
 #endif
-                VL_FATAL_MT("/home/johnny/ysyx-workbench/npc/digital_lab/decoder/vsrc/top.v", 2, "", "Settle region did not converge.");
+                VL_FATAL_MT("/home/johnny/ysyx-workbench/npc/digital_lab/alu/vsrc/top.v", 1, "", "Settle region did not converge.");
             }
             vlSelf->__VstlIterCount = ((IData)(1U) 
                                        + vlSelf->__VstlIterCount);
@@ -128,8 +128,12 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___ctor_var_reset\n"); );
     // Body
-    vlSelf->X = VL_RAND_RESET_I(8);
-    vlSelf->Y = VL_RAND_RESET_I(3);
-    vlSelf->empty = VL_RAND_RESET_I(1);
-    vlSelf->sseg = VL_RAND_RESET_I(7);
+    vlSelf->A = VL_RAND_RESET_I(4);
+    vlSelf->B = VL_RAND_RESET_I(4);
+    vlSelf->crl = VL_RAND_RESET_I(3);
+    vlSelf->result = VL_RAND_RESET_I(4);
+    vlSelf->carry = VL_RAND_RESET_I(1);
+    vlSelf->overflow = VL_RAND_RESET_I(1);
+    vlSelf->zero = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__result_m = VL_RAND_RESET_I(4);
 }
